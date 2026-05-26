@@ -6,6 +6,7 @@ import {
   Activity,
   AlertTriangle,
   BarChart3,
+  BookOpen,
   CheckCircle2,
   Cpu,
   Database,
@@ -248,8 +249,166 @@ const tabs = [
   { id: "comparativo", label: "Comparativo" },
   { id: "tecnologia", label: "Tecnología" },
   { id: "evaluacion", label: "Evaluación" },
+  { id: "metodologia", label: "Metodología" },
   { id: "palabras", label: "Lenguaje" },
   { id: "preguntas", label: "Preguntas" }
+];
+
+const methodologyCriteria = [
+  {
+    id: "4.1",
+    title: "Claridad",
+    description: "Evalúa si la propuesta se entiende sin necesidad de inferir demasiado.",
+    rows: [
+      ["1", "Declaración vaga o puramente retórica"],
+      ["2", "Idea general, sin acción precisa"],
+      ["3", "Acción identificable, pero incompleta"],
+      ["4", "Acción clara con problema y beneficiarios"],
+      ["5", "Acción clara, con meta, instrumento y responsable"]
+    ],
+    examples: [
+      "Ejemplo de baja claridad: “vamos a poner orden”.",
+      "Ejemplo de mayor claridad: “100 mil jóvenes recibirán un monto determinado en una cuenta individual para capacitación, emprendimiento o subsidio salarial”."
+    ]
+  },
+  {
+    id: "4.2",
+    title: "Coherencia interna",
+    description: "Evalúa si la propuesta guarda relación lógica con el diagnóstico presentado.",
+    rows: [
+      ["1", "Diagnóstico y propuesta no se conectan"],
+      ["2", "Conexión débil o contradictoria"],
+      ["3", "Conexión parcial"],
+      ["4", "Buena relación problema-solución"],
+      ["5", "Diagnóstico, propuesta, instrumento y resultado están alineados"]
+    ]
+  },
+  {
+    id: "4.3",
+    title: "Nivel de concreción",
+    description: "Evalúa cuánto detalle operativo ofrece.",
+    rows: [
+      ["1", "Solo objetivo general"],
+      ["2", "Menciona acción, sin instrumento"],
+      ["3", "Menciona instrumento, pero sin metas ni responsable"],
+      ["4", "Incluye instrumento, población o meta"],
+      ["5", "Incluye instrumento, población, meta, plazo, responsable y fuente de financiamiento"]
+    ]
+  },
+  {
+    id: "4.4",
+    title: "Viabilidad jurídica e institucional",
+    description: "Evalúa si la propuesta puede ejecutarse dentro del marco normativo y competencial vigente.",
+    rows: [
+      ["1", "Incompatible con competencias o marco constitucional"],
+      ["2", "Requiere reformas complejas no explicadas"],
+      ["3", "Viable, pero con ajustes normativos relevantes"],
+      ["4", "Viable dentro del marco actual con coordinación institucional"],
+      ["5", "Claramente ejecutable con instrumentos existentes"]
+    ],
+    questions: [
+      "¿El Ejecutivo tiene competencia para hacerlo?",
+      "¿Requiere ley del Congreso?",
+      "¿Requiere reforma constitucional?",
+      "¿Compromete competencias regionales o municipales?",
+      "¿Supone crear una entidad nueva?",
+      "¿Puede implementarse vía decreto supremo, política nacional, programa presupuestal o modificación reglamentaria?"
+    ]
+  },
+  {
+    id: "4.5",
+    title: "Viabilidad presupuestal",
+    description: "Evalúa si la propuesta reconoce costos, fuente de financiamiento o restricciones fiscales.",
+    rows: [
+      ["1", "Promesa sin costo ni fuente"],
+      ["2", "Alto costo sin explicación fiscal"],
+      ["3", "Menciona fuente genérica o reasignación"],
+      ["4", "Tiene fuente plausible, aunque no cuantificada"],
+      ["5", "Tiene costo, fuente, plazo y sostenibilidad fiscal"]
+    ]
+  },
+  {
+    id: "4.6",
+    title: "Sustento técnico",
+    description: "Evalúa si la propuesta se apoya en datos, evidencia, experiencia previa o diagnóstico verificable.",
+    rows: [
+      ["1", "No tiene sustento"],
+      ["2", "Usa afirmaciones generales"],
+      ["3", "Usa algunos datos o ejemplos"],
+      ["4", "Usa datos y experiencia institucional"],
+      ["5", "Usa evidencia, línea base, metas e indicadores"]
+    ]
+  },
+  {
+    id: "4.7",
+    title: "Riesgo de implementación",
+    description: "Evalúa la probabilidad de que la propuesta falle por problemas de diseño o ejecución.",
+    rows: [
+      ["1", "Riesgo muy alto"],
+      ["2", "Riesgo alto"],
+      ["3", "Riesgo medio"],
+      ["4", "Riesgo bajo"],
+      ["5", "Riesgo muy bajo"]
+    ],
+    riskFactors: [
+      "falta de presupuesto",
+      "oposición legislativa",
+      "ausencia de entidad responsable",
+      "riesgo de corrupción",
+      "duplicidad institucional",
+      "baja capacidad regional o local",
+      "plazos irreales",
+      "litigios o arbitrajes",
+      "resistencia burocrática",
+      "falta de interoperabilidad tecnológica",
+      "ausencia de datos confiables"
+    ]
+  }
+];
+
+const technologyCriteria = [
+  ["Claridad tecnológica", "¿Se entiende qué tecnología se usaría y para qué?"],
+  ["Gobernanza", "¿Quién administra el sistema, datos o plataforma?"],
+  ["Interoperabilidad", "¿Se conecta con otros sistemas del Estado?"],
+  ["Protección de datos", "¿Considera privacidad, consentimiento, seguridad o datos sensibles?"],
+  ["Ciberseguridad", "¿Prevé riesgos de ataques, filtraciones o continuidad del servicio?"],
+  ["Inclusión digital", "¿Llega a zonas rurales, personas vulnerables o sin conectividad?"],
+  ["Sostenibilidad", "¿Hay presupuesto, mantenimiento y capacitación?"],
+  ["Impacto", "¿Mejora servicios, reduce costos, tiempos o corrupción?"],
+  ["Riesgo regulatorio", "¿Requiere norma, estándar, supervisión o autoridad responsable?"]
+];
+
+const technologyScale = [
+  ["1", "Mención superficial de tecnología"],
+  ["2", "Tecnología como herramienta genérica"],
+  ["3", "Propuesta tecnológica identificable, pero incompleta"],
+  ["4", "Propuesta con objetivo, entidad y uso definido"],
+  ["5", "Propuesta con gobernanza, datos, seguridad, interoperabilidad, presupuesto e impacto"]
+];
+
+const finalWeights = [
+  ["Claridad", "15%"],
+  ["Coherencia", "15%"],
+  ["Concreción", "20%"],
+  ["Viabilidad jurídica/institucional", "15%"],
+  ["Viabilidad presupuestal", "15%"],
+  ["Sustento técnico", "10%"],
+  ["Innovación / tecnología", "10%"]
+];
+
+const resultCategories = [
+  ["4.5 - 5.0", "Muy sólida", "Propuesta clara, viable, costeada y técnicamente sustentada"],
+  ["3.8 - 4.4", "Sólida", "Buena propuesta, con algunos vacíos menores"],
+  ["3.0 - 3.7", "Moderada", "Tiene valor, pero requiere desarrollo"],
+  ["2.0 - 2.9", "Débil", "Idea relevante, pero poco concreta o riesgosa"],
+  ["1.0 - 1.9", "Retórica", "No alcanza estándar mínimo de política pública"]
+];
+
+const methodologyExamples = [
+  ["Digitalización de la función pública en tres niveles", "4", "4", "3", "3", "2", "3", "3", "3.25"],
+  ["Programa “Mi primera chamba”", "5", "4", "5", "3", "3", "3", "3", "3.85"],
+  ["Uso de drones e imágenes satelitales contra tala ilegal", "4", "3", "3", "3", "2", "3", "4", "3.15"],
+  ["Historia clínica electrónica y telemedicina", "4", "4", "3", "3", "2", "3", "—", "—"]
 ];
 
 type Proposal = (typeof blocks)[number]["fp"];
@@ -400,7 +559,7 @@ export default function DebateTecnicoInteractivo() {
       <main className="mx-auto max-w-7xl px-6 py-10 lg:px-10">
         <div className="sticky top-0 z-20 -mx-6 border-b bg-white/95 px-6 py-4 backdrop-blur lg:-mx-10 lg:px-10">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-            <div className="grid grid-cols-2 gap-2 rounded-2xl bg-slate-100 p-1 lg:grid-cols-5">
+            <div className="grid grid-cols-2 gap-2 rounded-2xl bg-slate-100 p-1 lg:grid-cols-6">
               {tabs.map((tab) => (
                 <button
                   key={tab.id}
@@ -590,6 +749,103 @@ export default function DebateTecnicoInteractivo() {
             </motion.section>
           )}
 
+          {view === "metodologia" && (
+            <motion.section key="metodologia" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} className="py-10">
+              <div className="mb-8 grid gap-6 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
+                <div>
+                  <div className="mb-3 flex items-center gap-2 text-sm font-black uppercase tracking-[0.25em]" style={{ color: BLUE }}>
+                    <BookOpen className="h-4 w-4" /> Metodología
+                  </div>
+                  <h2 className="text-4xl font-black uppercase tracking-tight md:text-5xl">Criterios de evaluación del discurso</h2>
+                </div>
+                <p className="text-sm leading-6 text-slate-600">
+                  Cada propuesta se evalúa con siete criterios principales. Las menciones tecnológicas se revisan además con una matriz específica de gobernanza, datos, seguridad, interoperabilidad e impacto.
+                </p>
+              </div>
+
+              <section className="space-y-5">
+                <h3 className="text-2xl font-black uppercase" style={{ color: BLUE }}>4. Criterios de evaluación</h3>
+                <div className="grid gap-5 lg:grid-cols-2">
+                  {methodologyCriteria.map((criterion) => (
+                    <MethodCriterionCard key={criterion.id} criterion={criterion} />
+                  ))}
+                </div>
+              </section>
+
+              <section className="mt-10 space-y-5">
+                <h3 className="text-2xl font-black uppercase" style={{ color: BLUE }}>5. Criterios especiales para propuestas tecnológicas</h3>
+                <Card>
+                  <div className="p-6">
+                    <p className="mb-5 text-sm leading-6 text-slate-600">Toda mención vinculada a tecnología debe evaluarse con una matriz adicional.</p>
+                    <ResponsiveTable
+                      headers={["Criterio tecnológico", "Pregunta guía"]}
+                      rows={technologyCriteria}
+                    />
+                  </div>
+                </Card>
+                <Card>
+                  <div className="p-6">
+                    <h4 className="mb-4 text-xl font-black uppercase">Escala tecnológica</h4>
+                    <ResponsiveTable headers={["Puntaje", "Descripción"]} rows={technologyScale} />
+                  </div>
+                </Card>
+              </section>
+
+              <section className="mt-10 grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
+                <Card>
+                  <div className="p-6">
+                    <h3 className="mb-4 text-2xl font-black uppercase" style={{ color: BLUE }}>6. Matriz de calificación final</h3>
+                    <p className="mb-5 text-sm leading-6 text-slate-600">Cada equipo se evalúa por bloque y luego en promedio general.</p>
+                    <ResponsiveTable headers={["Criterio", "Peso sugerido"]} rows={finalWeights} />
+                    <p className="mt-4 text-sm font-black uppercase">Total: 100%</p>
+                  </div>
+                </Card>
+
+                <div className="rounded-[2rem] p-6 text-white shadow-sm" style={{ backgroundColor: BLUE }}>
+                  <h3 className="text-2xl font-black uppercase">Fórmula simple</h3>
+                  <p className="mt-3 text-sm leading-6 text-white/80">Puntaje final por propuesta:</p>
+                  <div className="mt-4 overflow-x-auto rounded-2xl bg-white/10 p-4">
+                    <code className="whitespace-nowrap text-sm font-bold text-white">
+                      Puntaje = (Claridad x 0.15) + (Coherencia x 0.15) + (Concreción x 0.20) + (Viabilidad institucional x 0.15) + (Viabilidad presupuestal x 0.15) + (Sustento técnico x 0.10) + (Innovación x 0.10)
+                    </code>
+                  </div>
+                  <p className="mt-4 text-sm leading-6 text-white/80">La nota final se expresa en escala de 1 a 5.</p>
+                </div>
+              </section>
+
+              <section className="mt-10 space-y-5">
+                <h3 className="text-2xl font-black uppercase" style={{ color: BLUE }}>7. Categorías de resultado</h3>
+                <Card>
+                  <div className="p-6">
+                    <ResponsiveTable headers={["Puntaje final", "Categoría", "Interpretación"]} rows={resultCategories} />
+                  </div>
+                </Card>
+              </section>
+
+              <section className="mt-10 space-y-5">
+                <h3 className="text-2xl font-black uppercase" style={{ color: BLUE }}>8. Ejemplo de aplicación</h3>
+                <Card>
+                  <div className="p-6">
+                    <ResponsiveTable
+                      headers={[
+                        "Propuesta",
+                        "Claridad",
+                        "Coherencia",
+                        "Concreción",
+                        "Viabilidad institucional",
+                        "Viabilidad presupuestal",
+                        "Sustento técnico",
+                        "Innovación",
+                        "Resultado"
+                      ]}
+                      rows={methodologyExamples}
+                    />
+                  </div>
+                </Card>
+              </section>
+            </motion.section>
+          )}
+
           {view === "palabras" && (
             <motion.section key="palabras" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} className="py-10">
               <div className="mb-8">
@@ -704,5 +960,86 @@ function QuestionCard({ title, questions }: { title: string; questions: string[]
         </ol>
       </div>
     </Card>
+  );
+}
+
+function MethodCriterionCard({ criterion }: { criterion: (typeof methodologyCriteria)[number] }) {
+  return (
+    <Card>
+      <div className="p-6">
+        <div className="mb-3 flex items-center justify-between gap-4">
+          <h4 className="text-xl font-black uppercase">{criterion.id} {criterion.title}</h4>
+          <span className="rounded-full px-3 py-1 text-xs font-black text-slate-950" style={{ backgroundColor: YELLOW }}>
+            1 a 5
+          </span>
+        </div>
+        <p className="mb-5 text-sm leading-6 text-slate-600">{criterion.description}</p>
+        <ResponsiveTable headers={["Puntaje", "Descripción"]} rows={criterion.rows} />
+
+        {"examples" in criterion && criterion.examples ? (
+          <div className="mt-5 space-y-2 rounded-2xl bg-slate-50 p-4 text-sm leading-6 text-slate-700">
+            {criterion.examples.map((example) => <p key={example}>{example}</p>)}
+          </div>
+        ) : null}
+
+        {"questions" in criterion && criterion.questions ? (
+          <MethodList title="Preguntas guía" items={criterion.questions} />
+        ) : null}
+
+        {"riskFactors" in criterion && criterion.riskFactors ? (
+          <MethodList title="Factores de riesgo" items={criterion.riskFactors} columns />
+        ) : null}
+      </div>
+    </Card>
+  );
+}
+
+function MethodList({ title, items, columns = false }: { title: string; items: string[]; columns?: boolean }) {
+  return (
+    <div className="mt-5 rounded-2xl bg-slate-50 p-4">
+      <h5 className="mb-3 text-sm font-black uppercase" style={{ color: BLUE }}>{title}</h5>
+      <ul className={`grid gap-2 ${columns ? "sm:grid-cols-2" : ""}`}>
+        {items.map((item) => (
+          <li key={item} className="flex gap-2 text-sm leading-6 text-slate-700">
+            <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full" style={{ backgroundColor: YELLOW }} />
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function ResponsiveTable({ headers, rows }: { headers: string[]; rows: string[][] }) {
+  return (
+    <div className="overflow-hidden rounded-2xl border border-slate-200">
+      <div className="overflow-x-auto">
+        <table className="w-full min-w-[560px] border-collapse text-left text-sm">
+          <thead>
+            <tr className="bg-slate-50">
+              {headers.map((header) => (
+                <th key={header} className="border-b border-slate-200 p-3 font-black uppercase tracking-wide text-slate-700">
+                  {header}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row, rowIndex) => (
+              <tr key={`${row.join("-")}-${rowIndex}`} className="border-b border-slate-200 last:border-b-0">
+                {row.map((cell, cellIndex) => (
+                  <td
+                    key={`${cell}-${cellIndex}`}
+                    className={`p-3 align-top leading-6 ${cellIndex === 0 ? "font-bold text-slate-950" : "text-slate-700"}`}
+                  >
+                    {cell}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 }
