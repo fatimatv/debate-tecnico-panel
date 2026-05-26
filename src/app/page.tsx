@@ -408,7 +408,7 @@ const methodologyExamples = [
   ["Digitalización de la función pública en tres niveles", "4", "4", "3", "3", "2", "3", "3", "3.25"],
   ["Programa “Mi primera chamba”", "5", "4", "5", "3", "3", "3", "3", "3.85"],
   ["Uso de drones e imágenes satelitales contra tala ilegal", "4", "3", "3", "3", "2", "3", "4", "3.15"],
-  ["Historia clínica electrónica y telemedicina", "4", "4", "3", "3", "2", "3", "—", "—"]
+  ["Historia clínica electrónica y telemedicina", "4", "4", "3", "3", "2", "3", "4", "3.30"]
 ];
 
 type Proposal = (typeof blocks)[number]["fp"];
