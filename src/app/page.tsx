@@ -411,6 +411,15 @@ const methodologyExamples = [
   ["Historia clínica electrónica y telemedicina", "4", "4", "3", "3", "2", "3", "4", "3.30"]
 ];
 
+const neutralityRules = [
+  "Se evalúa la propuesta, no la simpatía política del expositor.",
+  "Las acusaciones cruzadas solo se consideran si inciden en viabilidad, coherencia o responsabilidad institucional.",
+  "No se completa información faltante con supuestos.",
+  "Toda inferencia debe separarse de los hechos observados.",
+  "Las promesas sin mecanismo se califican como baja concreción.",
+  "Las propuestas tecnológicas se evalúan con estándar reforzado por sus impactos en derechos, datos personales, seguridad e inclusión digital."
+];
+
 type Proposal = (typeof blocks)[number]["fp"];
 
 function Card({ children, className = "" }: { children: ReactNode; className?: string }) {
@@ -842,6 +851,21 @@ export default function DebateTecnicoInteractivo() {
                     />
                   </div>
                 </Card>
+              </section>
+
+              <section className="mt-10 space-y-5">
+                <h3 className="text-2xl font-black uppercase" style={{ color: BLUE }}>9. Reglas de neutralidad</h3>
+                <div className="rounded-[2rem] p-6 text-white shadow-sm" style={{ backgroundColor: BLUE }}>
+                  <p className="mb-5 text-sm font-semibold leading-6 text-white/80">Para mantener neutralidad técnica:</p>
+                  <ul className="grid gap-3 md:grid-cols-2">
+                    {neutralityRules.map((rule) => (
+                      <li key={rule} className="flex gap-3 rounded-2xl bg-white/10 p-4 text-sm leading-6">
+                        <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0" style={{ color: YELLOW }} />
+                        <span>{rule}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </section>
             </motion.section>
           )}
