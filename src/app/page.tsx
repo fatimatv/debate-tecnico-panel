@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, type ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   Activity,
@@ -14,7 +14,6 @@ import {
   Network,
   RadioTower,
   Scale,
-  Search,
   ShieldAlert,
   Vote
 } from "lucide-react";
@@ -248,10 +247,9 @@ const gaps = [
 const tabs = [
   { id: "comparativo", label: "Comparativo" },
   { id: "tecnologia", label: "Tecnología" },
-  { id: "evaluacion", label: "Evaluación" },
-  { id: "metodologia", label: "Metodología" },
   { id: "palabras", label: "Lenguaje" },
-  { id: "preguntas", label: "Preguntas" }
+  { id: "preguntas", label: "Preguntas" },
+  { id: "metodologia", label: "Metodología" }
 ];
 
 const methodologyCriteria = [
@@ -505,15 +503,8 @@ function TeamCard({ title, data, color }: { title: string; data: Proposal; color
 export default function DebateTecnicoInteractivo() {
   const [selected, setSelected] = useState(blocks[0].id);
   const [view, setView] = useState("comparativo");
-  const [query, setQuery] = useState("");
 
-  const filteredBlocks = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    if (!q) return blocks;
-    return blocks.filter((block) => JSON.stringify(block).toLowerCase().includes(q));
-  }, [query]);
-
-  const current = blocks.find((block) => block.id === selected) || filteredBlocks[0] || blocks[0];
+  const current = blocks.find((block) => block.id === selected) || blocks[0];
 
   return (
     <div className="min-h-screen bg-white text-slate-950" style={{ fontFamily: "Montserrat, Poppins, Avenir Next, system-ui, sans-serif" }}>
@@ -541,7 +532,7 @@ export default function DebateTecnicoInteractivo() {
                 Mapa interactivo del debate técnico presidencial
               </h1>
               <p className="mt-6 max-w-3xl text-lg leading-8 text-white/85">
-                Lectura comparativa, jurídico-regulatoria y tecnológica de las propuestas de Fuerza Popular y Juntos por el Perú, organizada por bloques, riesgos, vacíos y capacidad de implementación.
+                Lectura comparativa, jurídico-regulatoria y tecnológica de las propuestas para la Segunda Vuelta 2026 de Fuerza Popular y Juntos por el Perú.
               </p>
             </div>
 
@@ -568,7 +559,7 @@ export default function DebateTecnicoInteractivo() {
       <main className="mx-auto max-w-7xl px-6 py-10 lg:px-10">
         <div className="sticky top-0 z-20 -mx-6 border-b bg-white/95 px-6 py-4 backdrop-blur lg:-mx-10 lg:px-10">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-            <div className="grid grid-cols-2 gap-2 rounded-2xl bg-slate-100 p-1 lg:grid-cols-6">
+            <div className="grid grid-cols-2 gap-2 rounded-2xl bg-slate-100 p-1 sm:grid-cols-3 lg:grid-cols-5">
               {tabs.map((tab) => (
                 <button
                   key={tab.id}
@@ -583,21 +574,12 @@ export default function DebateTecnicoInteractivo() {
             </div>
 
             <div className="flex flex-col gap-3 sm:flex-row">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
-                <input
-                  value={query}
-                  onChange={(event) => setQuery(event.target.value)}
-                  placeholder="Buscar tema, riesgo o propuesta"
-                  className="h-11 w-full rounded-2xl border border-slate-200 bg-white pl-10 pr-4 text-sm outline-none focus:border-blue-600 sm:w-72"
-                />
-              </div>
               <select
                 value={current.id}
                 onChange={(event) => setSelected(event.target.value)}
                 className="h-11 rounded-2xl border border-slate-200 bg-white px-4 text-sm font-semibold outline-none focus:border-blue-600 sm:w-72"
               >
-                {filteredBlocks.map((block) => <option key={block.id} value={block.id}>{block.title}</option>)}
+                {blocks.map((block) => <option key={block.id} value={block.id}>{block.title}</option>)}
               </select>
             </div>
           </div>
@@ -739,9 +721,9 @@ export default function DebateTecnicoInteractivo() {
 
                   {evaluation.map((row) => (
                     <div key={row.criterio} className="rounded-2xl border border-slate-200 bg-white p-4">
-                      <div className="mb-2 flex justify-between text-sm font-black uppercase">
+                      <div className="mb-3 text-center text-sm font-black uppercase">
                         <span>{row.criterio}</span>
-                        <span>FP {row.FP} · JPP {row.JPP}</span>
+                        <span className="ml-3 text-slate-600">FP {row.FP} · JPP {row.JPP}</span>
                       </div>
                       <div className="grid grid-cols-2 gap-2">
                         <div className="h-2 rounded-full bg-slate-100">
@@ -945,21 +927,6 @@ export default function DebateTecnicoInteractivo() {
                     "¿Cuál es su propuesta sobre inteligencia artificial en el Estado?"
                   ]}
                 />
-              </div>
-
-              <div className="mt-6 rounded-[2rem] p-6 text-slate-950" style={{ backgroundColor: YELLOW }}>
-                <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-                  <div className="flex items-center gap-3">
-                    <CheckCircle2 className="h-7 w-7" />
-                    <div>
-                      <div className="font-black uppercase">Criterio editorial</div>
-                      <div className="text-sm">Separar hechos, inferencias y opinión analítica evita convertir el debate técnico en propaganda con gráficos bonitos.</div>
-                    </div>
-                  </div>
-                  <button type="button" className="rounded-2xl bg-slate-950 px-5 py-3 text-sm font-bold text-white hover:bg-slate-800">
-                    Usar como guía de entrevista
-                  </button>
-                </div>
               </div>
             </motion.section>
           )}
