@@ -795,10 +795,26 @@ export default function DebateTecnicoInteractivo() {
                 <div className="rounded-[2rem] p-6 text-white shadow-sm" style={{ backgroundColor: BLUE }}>
                   <h3 className="text-2xl font-black uppercase">Fórmula simple</h3>
                   <p className="mt-3 text-sm leading-6 text-white/80">Puntaje final por propuesta:</p>
-                  <div className="mt-4 overflow-x-auto rounded-2xl bg-white/10 p-4">
-                    <code className="whitespace-nowrap text-sm font-bold text-white">
-                      Puntaje = (Claridad x 0.15) + (Coherencia x 0.15) + (Concreción x 0.20) + (Viabilidad institucional x 0.15) + (Viabilidad presupuestal x 0.15) + (Sustento técnico x 0.10) + (Innovación x 0.10)
-                    </code>
+                  <div className="mt-4 rounded-2xl bg-white/10 p-4">
+                    <div className="grid gap-2 text-sm font-bold leading-6 text-white">
+                      <div>Puntaje =</div>
+                      <div className="grid gap-2 sm:grid-cols-2">
+                        {[
+                          "(Claridad x 0.15)",
+                          "(Coherencia x 0.15)",
+                          "(Concreción x 0.20)",
+                          "(Viabilidad institucional x 0.15)",
+                          "(Viabilidad presupuestal x 0.15)",
+                          "(Sustento técnico x 0.10)",
+                          "(Innovación x 0.10)"
+                        ].map((item, index) => (
+                          <div key={item} className="flex gap-2 rounded-xl bg-white/10 px-3 py-2">
+                            <span className="shrink-0 text-white/60">{index === 0 ? "" : "+"}</span>
+                            <span>{item}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                   <p className="mt-4 text-sm leading-6 text-white/80">La nota final se expresa en escala de 1 a 5.</p>
                 </div>
