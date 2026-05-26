@@ -254,7 +254,7 @@ const tabs = [
 
 const methodologyCriteria = [
   {
-    id: "4.1",
+    id: "1.1",
     title: "Claridad",
     description: "Evalúa si la propuesta se entiende sin necesidad de inferir demasiado.",
     rows: [
@@ -270,7 +270,7 @@ const methodologyCriteria = [
     ]
   },
   {
-    id: "4.2",
+    id: "1.2",
     title: "Coherencia interna",
     description: "Evalúa si la propuesta guarda relación lógica con el diagnóstico presentado.",
     rows: [
@@ -282,7 +282,7 @@ const methodologyCriteria = [
     ]
   },
   {
-    id: "4.3",
+    id: "1.3",
     title: "Nivel de concreción",
     description: "Evalúa cuánto detalle operativo ofrece.",
     rows: [
@@ -294,7 +294,7 @@ const methodologyCriteria = [
     ]
   },
   {
-    id: "4.4",
+    id: "1.4",
     title: "Viabilidad jurídica e institucional",
     description: "Evalúa si la propuesta puede ejecutarse dentro del marco normativo y competencial vigente.",
     rows: [
@@ -314,7 +314,7 @@ const methodologyCriteria = [
     ]
   },
   {
-    id: "4.5",
+    id: "1.5",
     title: "Viabilidad presupuestal",
     description: "Evalúa si la propuesta reconoce costos, fuente de financiamiento o restricciones fiscales.",
     rows: [
@@ -326,7 +326,7 @@ const methodologyCriteria = [
     ]
   },
   {
-    id: "4.6",
+    id: "1.6",
     title: "Sustento técnico",
     description: "Evalúa si la propuesta se apoya en datos, evidencia, experiencia previa o diagnóstico verificable.",
     rows: [
@@ -338,7 +338,7 @@ const methodologyCriteria = [
     ]
   },
   {
-    id: "4.7",
+    id: "1.7",
     title: "Riesgo de implementación",
     description: "Evalúa la probabilidad de que la propuesta falle por problemas de diseño o ejecución.",
     rows: [
@@ -755,7 +755,7 @@ export default function DebateTecnicoInteractivo() {
               </div>
 
               <section className="space-y-5">
-                <h3 className="text-2xl font-black uppercase" style={{ color: BLUE }}>4. Criterios de evaluación</h3>
+                <h3 className="text-2xl font-black uppercase" style={{ color: BLUE }}>1. Criterios de evaluación</h3>
                 <div className="grid gap-5 lg:grid-cols-2">
                   {methodologyCriteria.map((criterion) => (
                     <MethodCriterionCard key={criterion.id} criterion={criterion} />
@@ -764,7 +764,7 @@ export default function DebateTecnicoInteractivo() {
               </section>
 
               <section className="mt-10 space-y-5">
-                <h3 className="text-2xl font-black uppercase" style={{ color: BLUE }}>5. Criterios especiales para propuestas tecnológicas</h3>
+                <h3 className="text-2xl font-black uppercase" style={{ color: BLUE }}>2. Criterios especiales para propuestas tecnológicas</h3>
                 <Card>
                   <div className="p-6">
                     <p className="mb-5 text-sm leading-6 text-slate-600">Toda mención vinculada a tecnología debe evaluarse con una matriz adicional.</p>
@@ -785,7 +785,7 @@ export default function DebateTecnicoInteractivo() {
               <section className="mt-10 grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
                 <Card>
                   <div className="p-6">
-                    <h3 className="mb-4 text-2xl font-black uppercase" style={{ color: BLUE }}>6. Matriz de calificación final</h3>
+                    <h3 className="mb-4 text-2xl font-black uppercase" style={{ color: BLUE }}>3. Matriz de calificación final</h3>
                     <p className="mb-5 text-sm leading-6 text-slate-600">Cada equipo se evalúa por bloque y luego en promedio general.</p>
                     <ResponsiveTable headers={["Criterio", "Peso sugerido"]} rows={finalWeights} />
                     <p className="mt-4 text-sm font-black uppercase">Total: 100%</p>
@@ -821,7 +821,7 @@ export default function DebateTecnicoInteractivo() {
               </section>
 
               <section className="mt-10 space-y-5">
-                <h3 className="text-2xl font-black uppercase" style={{ color: BLUE }}>7. Categorías de resultado</h3>
+                <h3 className="text-2xl font-black uppercase" style={{ color: BLUE }}>4. Categorías de resultado</h3>
                 <Card>
                   <div className="p-6">
                     <ResponsiveTable headers={["Puntaje final", "Categoría", "Interpretación"]} rows={resultCategories} />
@@ -830,7 +830,7 @@ export default function DebateTecnicoInteractivo() {
               </section>
 
               <section className="mt-10 space-y-5">
-                <h3 className="text-2xl font-black uppercase" style={{ color: BLUE }}>8. Ejemplo de aplicación</h3>
+                <h3 className="text-2xl font-black uppercase" style={{ color: BLUE }}>5. Ejemplo de aplicación</h3>
                 <Card>
                   <div className="p-6">
                     <ResponsiveTable
@@ -852,7 +852,7 @@ export default function DebateTecnicoInteractivo() {
               </section>
 
               <section className="mt-10 space-y-5">
-                <h3 className="text-2xl font-black uppercase" style={{ color: BLUE }}>9. Reglas de neutralidad</h3>
+                <h3 className="text-2xl font-black uppercase" style={{ color: BLUE }}>6. Reglas de neutralidad</h3>
                 <div className="rounded-[2rem] p-6 text-white shadow-sm" style={{ backgroundColor: BLUE }}>
                   <p className="mb-5 text-sm font-semibold leading-6 text-white/80">Para mantener neutralidad técnica:</p>
                   <ul className="grid gap-3 md:grid-cols-2">
